@@ -1,0 +1,48 @@
+@startuml
+actor BankUser
+actor ATMSystem
+
+rectangle "ATMInterface" {
+    (Provide Card and PIN)
+    (Invalid Credentials) 
+    (Withdrawl) 
+    (Request Withdrawal Amount) 
+    (Release Money and Update Account) 
+    (Invalid Balance)
+    (Deposit) 
+    (Open Money Slot for Deposit)
+    (Request Money from User)
+    (Update Users Account)
+    (Invalid Currency)
+    (Balance) 
+    (Display User Balance) 
+    (Help) 
+    (Display Help Options) 
+    (Call Technician) 
+    
+    BankUser --> (Provide Card and PIN) : Provide Info
+    (Provide Card and PIN) --> ATMSystem : Verify Info
+    (Provide Card and PIN) <-- (Invalid Credentials) : <<extend>>
+    
+    BankUser --> (Withdrawl)
+    (Withdrawl) <-- (Provide Card and PIN) : <<include>>
+    (Withdrawl) --> (Request Withdrawal Amount) : Request $
+    (Withdrawl) --> (Release Money and Update Account)
+    (Withdrawl) <-- (Invalid Balance) : <<extend>>
+
+    BankUser --> (Deposit)
+    (Deposit) <-- (Provide Card and PIN) : <<include>>
+    (Deposit) --> (Open Money Slot for Deposit)
+    (Open Money Slot for Deposit) --> (Request Money from User)
+    (Open Money Slot for Deposit) --> ATMSystem : Update Account
+    (Open Money Slot for Deposit) <-- (Invalid Currency) : <<extend>>
+    
+    BankUser --> (Balance)
+    ATMSystem --> (Display User Balance) : Display Balance
+    
+    BankUser --> (Help)
+    (Help) --> (Display Help Options)
+    (Help) --> (Call Technician)
+}
+
+@enduml
