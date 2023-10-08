@@ -1,23 +1,32 @@
 @startuml
 
+'Defining non-unique library material traits + methods
 class Material {
     -materialID: String
     -title: String
     +getMaterialID(): String
     +getTitle(): String
 }
+
+'defining unique trait and method of Book class- Inheritance of material
 class Book {
     -authors: String[]
     +getAuthors(): String[]
 }
+
+'defining unique trait and method of Journal class- Inheritance of material
 class Journal {
     -producers: String
     +getProducers(): String
 }
+
+'defining unique trait and method of CD class- Inheritance of material
 class CD{
     -entertainer: String
     +getEntertainer(): String
 }
+
+'defining all characteristic and get methods for User class- Association with Loan
 class User {
     -userID: String
     -userName: String
@@ -29,6 +38,8 @@ class User {
     +getAge(): int
     +getPhoneNumber(): String
 }
+
+'defining all characteristics and get methods for Transaction class- Aggregation of Material
 class Transaction {
     -checkOutMaterial: Material
     -checkOutUser: User
@@ -42,11 +53,16 @@ class Transaction {
     +getCheckOutCounter(): int
     +increaseCheckOutCounter(): void
 }
+
+'Creating connecting arrows
 Material <|-- Book
 Material <|-- Journal
 Material <|-- CD
 
+'Defining a 1 to 0 association between Transaction and Material
 Material "1" -- "0..*" Transaction: contains
+
+'Defining a 1 to 0 association between User and Transaction
 User "1" -- "0..*" Transaction: makes
 
 @enduml
