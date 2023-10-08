@@ -1,0 +1,52 @@
+@startuml
+
+class Material {
+    -materialID: String
+    -title: String
+    +getMaterialID(): String
+    +getTitle(): String
+}
+class Book {
+    -authors: String[]
+    +getAuthors(): String[]
+}
+class Journal {
+    -producers: String
+    +getProducers(): String
+}
+class CD{
+    -entertainer: String
+    +getEntertainer(): String
+}
+class User {
+    -userID: String
+    -userName: String
+    -birthdate: Date
+    -age: int
+    -phoneNumber: String
+    +getUserName(): String
+    +getUserID(): String
+    +getAge(): int
+    +getPhoneNumber(): String
+}
+class Transaction {
+    -checkOutMaterial: Material
+    -checkOutUser: User
+    -checkOutDate: Date
+    -checkOutTime: Time
+    -checkOutCounter: int
+    +getCheckOutMaterial(): Material
+    +getCheckOutUser(): User
+    +getCheckOutDate(): Date
+    +getCheckOutTime(): Time
+    +getCheckOutCounter(): int
+    +increaseCheckOutCounter(): void
+}
+Material <|-- Book
+Material <|-- Journal
+Material <|-- CD
+
+Material "1" -- "0..*" Transaction: contains
+User "1" -- "0..*" Transaction: makes
+
+@enduml
